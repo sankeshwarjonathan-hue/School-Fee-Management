@@ -1,14 +1,15 @@
 package servlet;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 import listener.AppContextListener;
 import model.User;
 import service.UserService;
@@ -38,7 +39,7 @@ public class DashboardServlet extends HttpServlet {
             return;
         }
         if (user.isAdmin()) {
-            resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+            resp.sendRedirect(req.getContextPath() + "/admin/dashboard"); //Tomcat forwards the request internally to dashboard.jsp
             return;
         }
 
@@ -78,6 +79,6 @@ public class DashboardServlet extends HttpServlet {
             req.setAttribute("sumTotal", total);
             req.setAttribute("sumPaid", paid);
         }
-        req.getRequestDispatcher(VIEW).forward(req, resp);
+        req.getRequestDispatcher(VIEW).forward(req, resp); //dispacter used  navigate from one resource to another
     }
 }
